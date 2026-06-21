@@ -1,70 +1,89 @@
-/* style.css - Archivo Completo */
+/* style.css - Archivo Completo y Definitivo */
 
-body {
-    background-color: #000;
+/* 1. Base del sistema */
+body, html {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    font-family: 'Courier New', monospace;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden; /* Evita que la pantalla se desplace */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* 2. El efecto Matrix (Fondo) */
 #matrix {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 0; /* Detrás de todo */
 }
 
+/* 3. El contenedor central (Terminal) */
 #terminal {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Por encima de la Matrix */
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #00FF00;
-    padding: 20px;
+    padding: 25px;
     width: 90%;
-    max-width: 400px;
-    margin: 50px auto;
+    max-width: 450px;
+    margin: 20px auto;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
     text-align: center;
     box-sizing: border-box;
 }
 
+/* 4. Estilo de los textos */
 #texto {
     color: #00FF00;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 20px;
     word-break: break-word;
     text-shadow: 1px 1px 2px #000;
+    min-height: 50px; /* Para que el cuadro no salte de tamaño */
 }
 
+/* 5. Estilo de la foto (Oculta por defecto) */
 #miFoto {
-    display: none;
+    display: none; /* ¡CORREGIDO! Solo aparece por JS */
     width: 100%;
     max-width: 250px;
     height: auto;
     border: 2px solid #00FF00;
-    margin: 15px auto;
+    margin: 20px auto;
     border-radius: 5px;
-    filter: sepia(100%) hue-rotate(60deg) brightness(0.8);
-    box-shadow: 0 0 10px #00FF00;
-    display: block; /* Solo para pruebas, luego cambialo a display: none en el HTML o JS */
+    filter: sepia(100%) hue-rotate(60deg) brightness(0.9);
+    box-shadow: 0 0 15px #00FF00;
 }
 
+/* 6. Caja de entrada de texto */
 input {
     background: #000;
     border: 1px solid #00FF00;
     color: #00FF00;
-    padding: 12px;
+    padding: 15px;
     width: 100%;
     box-sizing: border-box;
     margin-top: 15px;
     font-family: 'Courier New', monospace;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    outline: none;
 }
 
+input:disabled {
+    border-color: #333;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* 7. Botón de envío */
 button {
     background-color: #000;
     color: #00FF00;
@@ -76,9 +95,30 @@ button {
     margin-top: 15px;
     font-family: 'Courier New', monospace;
     text-transform: uppercase;
+    transition: all 0.3s;
 }
 
 button:hover {
     background-color: #00FF00;
     color: #000;
+}
+
+/* 8. Overlay de cierre (SISTEMA FINALIZADO) */
+#overlayFinal {
+    display: none; /* Oculto hasta que el JS lo active */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Por encima de todo */
+    text-transform: uppercase;
+    text-shadow: 0 0 20px #fff;
+    cursor: default;
 }

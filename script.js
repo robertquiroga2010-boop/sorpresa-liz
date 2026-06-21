@@ -1,8 +1,9 @@
-// --- 1. CONFIGURACIÓN MATRIX ---
+// --- 1. CONFIGURACIÓN DEL EFECTO MATRIX ---
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+
 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 const fontSize = 16;
 let columns = canvas.width / fontSize;
@@ -23,7 +24,8 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 35);
 
-// --- 2. LÓGICA DE CONVERSACIÓN ---
+// --- 2. LÓGICA DE LA CONVERSACIÓN ---
+
 function escribir(texto) {
     document.getElementById("texto").innerText = texto;
 }
@@ -32,6 +34,7 @@ function coincide(respuesta, lista) {
     return lista.some(palabra => respuesta.includes(palabra));
 }
 
+// Inicialización: Mensaje de bienvenida
 window.onload = function() {
     escribir("Sistema: Infiltración iniciada. ¿Liz, estás ahí?");
     document.getElementById("miFoto").style.display = "none";
@@ -42,11 +45,13 @@ let paso = 0;
 function verificar() {
     let input = document.getElementById("respuestaUsuario");
     let res = input.value.trim().toLowerCase();
-    input.value = ""; 
+    input.value = ""; // Limpiar caja después de enviar
 
+    // Listas de palabras clave para las respuestas
     const listaSi = ["si", "hola", "estoy", "aca", "acá", "obvio", "claro", "soy yo"];
-    const listaNoSe = ["no se", "nose", "quien sos", "quien eres", "ni idea", "no tengo idea", "no se quien", "quien habla", "quien sos"];
+    const listaNoSe = ["no", "no se", "nose", "quien sos", "quien eres", "ni idea", "no tengo idea", "no se quien", "quien habla", "quien sos", "no, ni idea"];
     const listaPapa = ["papa", "papá", "pa", "papi", "padre", "viejo", "roberto", "rober", "vieja", "mi papa", "mi viejo", "mi pa"];
+    const listaAmor = ["quiero", "amo", "también", "yo también", "te quiero"];
 
     // PASO 0: Inicio
     if (paso === 0) {
@@ -73,20 +78,33 @@ function verificar() {
             escribir("No entiendo... concentrate. ¿Quién te está hablando?");
         }
     }
-    // PASO 2: Confirmación Final
+    // PASO 2: Confirmación y Foto
     else if (paso === 2) {
         if (coincide(res, listaPapa)) {
             escribir("Soy tu papá. Y te amo mucho, hija. Mirá.");
             document.getElementById("miFoto").style.display = "block";
-            // Efecto dramático antes de cerrar
-            setTimeout(() => {
-                escribir("Mira Tu Papito, te ama tu viejo.");
-            }, 1000);
-            paso = 3;
+            paso = 3; 
         } else if (coincide(res, listaNoSe)) {
             escribir("¿Otra vez? Pensá un poquito... ¿quién te habla siempre?");
         } else {
             escribir("Estás jugando conmigo... ¿Quién soy realmente?");
+        }
+    }
+    // PASO 3: Intercambio final de cariño
+    else if (paso === 3) {
+        if (coincide(res, listaAmor)) {
+            escribir("Yo también te amo muchísimo, Liz. Sos lo más importante para mí. ❤️");
+            
+            // Cierre automático tras 3 segundos
+            setTimeout(() => {
+                // Activar el cartel de cierre que definimos en el HTML y CSS
+                document.getElementById('overlayFinal').style.display = 'flex';
+                input.disabled = true; // Desactivar el input para que no escriba más
+            }, 3000); 
+            
+            paso = 4;
+        } else {
+            escribir("¡Dale, no me digas eso! Decime algo lindo que tu viejo te está esperando 😉");
         }
     }
 }
