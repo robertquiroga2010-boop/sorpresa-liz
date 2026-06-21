@@ -8,7 +8,7 @@ body, html {
     height: 100%;
     background-color: #000;
     font-family: 'Courier New', Courier, monospace;
-    overflow: hidden; /* Evita que la pantalla se desplace */
+    overflow: hidden; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,13 +21,13 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Detrás de todo */
+    z-index: 0; 
 }
 
 /* 3. El contenedor central (Terminal) */
 #terminal {
     position: relative;
-    z-index: 1; /* Por encima de la Matrix */
+    z-index: 1; 
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #00FF00;
     padding: 25px;
@@ -47,15 +47,17 @@ body, html {
     margin-bottom: 20px;
     word-break: break-word;
     text-shadow: 1px 1px 2px #000;
-    min-height: 50px; /* Para que el cuadro no salte de tamaño */
+    min-height: 50px; 
 }
 
-/* 5. Estilo de la foto (Oculta por defecto) */
+/* 5. Estilo de la foto (CORRECCIÓN PARA MÓVIL) */
 #miFoto {
-    display: none; /* ¡CORREGIDO! Solo aparece por JS */
+    display: none; 
     width: 100%;
     max-width: 250px;
-    height: auto;
+    height: auto; 
+    max-height: 40vh; /* ¡ESTO EVITA QUE SE CORTE EN EL CELU! */
+    object-fit: contain; 
     border: 2px solid #00FF00;
     margin: 20px auto;
     border-radius: 5px;
@@ -105,7 +107,7 @@ button:hover {
 
 /* 8. Overlay de cierre (SISTEMA FINALIZADO) */
 #overlayFinal {
-    display: none; /* Oculto hasta que el JS lo active */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
@@ -117,7 +119,7 @@ button:hover {
     font-weight: bold;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Por encima de todo */
+    z-index: 9999; 
     text-transform: uppercase;
     text-shadow: 0 0 20px #fff;
     cursor: default;
